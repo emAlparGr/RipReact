@@ -1,0 +1,55 @@
+.buttons {
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+    margin-top: 10px;
+}
+
+.text {
+    margin-bottom: 10px;
+}
+
+.inq {
+    width: 70%;
+    height: 5%;
+    border: 2px palevioletred solid;
+}
+
+.image {
+    background-repeat: no-repeat;
+    background-position: right bottom 100%;
+    background-size: 50%;
+    background-image: url('images/фон1.jpg');
+}
+
+.left-container {
+    position: fixed;
+    top: 50%;
+    display: flex;
+    flex-direction: column;
+    height: 70%;
+    width: 50%;
+    align-items: center;
+}
+
+.head {
+    position: absolute;
+    right: 18%;
+    top: 50%;
+    color: white;
+    -webkit-text-stroke: 1px palevioletred ;
+}
+
+.quot {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.ad {
+    top: 0;
+    position: fixed;
+    left: 0;
+}
