@@ -3,6 +3,7 @@ import { Modal, Button } from 'react-bootstrap';
 
 
 export default function MyVerticallyCenteredModal(props) {
+    const [ChangeQ, setChangeQ] = React.useState("");
     return (
         <Modal
             {...props}
@@ -18,11 +19,14 @@ export default function MyVerticallyCenteredModal(props) {
             <Modal.Body>
                 <h4>Введите измененную цитату</h4>
                 <p>
-                    <input className='inq' type='text'></input>
+                    <input className='inq' type='text' onChange={e => setChangeQ(e.target.value)}></input>
                 </p>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant='success' >Сохранить</Button>
+                <Button variant='success' onClick={() => {
+                    console.log(props)
+                    props.change(ChangeQ);
+                }}>Сохранить</Button>
             </Modal.Footer>
         </Modal>
     );

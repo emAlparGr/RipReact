@@ -6,7 +6,7 @@ import Quotes from './Quotes';
 function App() {
   return (
     <div>
-      <h1 class='head'>Цитатник</h1>
+      <h1 className='head'>Цитатник</h1>
       <Quotes />
     </div>
   )
