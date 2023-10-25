@@ -24,8 +24,7 @@ export default function MyVerticallyCenteredModal(props) {
             </Modal.Body>
             <Modal.Footer>
                 <Button variant='success' onClick={() => {
-                    console.log(props)
-                    props.change(ChangeQ);
+                    props.change(ChangeQ, props.changeid);
                 }}>Сохранить</Button>
             </Modal.Footer>
         </Modal>

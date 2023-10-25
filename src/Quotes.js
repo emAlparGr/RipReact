@@ -7,7 +7,7 @@ function Quotes() {
 
     const [modalShow, setModalShow] = React.useState(false);
     const [modalShowA, setModalShowA] = React.useState(false);
-    const [ListQ, setListQ, changeListQ] = React.useState([]);
+    const [ListQ, setListQ] = React.useState([]);
 
     React.useEffect(() => {
         fetch("http://localhost:8000/api/quotes/qget")
@@ -32,16 +32,18 @@ function Quotes() {
             })
     }
 
-    const handlePut = Quote => {
-        fetch("http://localhost:8000/api/quotes/qput/" + Quote, {
+    const handlePut = (Quote, changeid) => {
+        fetch("http://localhost:8000/api/quotes/qput/" + changeid, {
             method: "PUT",
             body: JSON.stringify({ author: Quote }),
         })
             .then(respone => { return respone.json() })
             .then(responeData => {
                 let arr = Array.from(ListQ);
-                // arr.push(responeData.author);
-                changeListQ(arr);
+                let deleteId = arr.findIndex(item => item.id === changeid)
+                arr.splice(deleteId, 1);
+                arr.push(responeData.author);
+                setListQ(arr);
                 setModalShow(false);
             })
     }
@@ -59,13 +61,19 @@ function Quotes() {
             })
     }
 
+    let idd = null;
+
+    let changeid = id => {
+        global.idd = id;
+    }
+
     return (
         <div className='left-container'>
             <div className="ad"> <Button variant="outline-primary" onClick={() => setModalShowA(true)}>Добавить</Button></div>
             {ListQ.map((q) => (
                 <span className="quot" key={q.id}>
                     <li>{q.author}</li>
-                    <Button variant="outline-secondary" onClick={() => setModalShow(true)}>Редактировать</Button>
+                    <Button variant="outline-secondary" onClick={() => { changeid(q.id); setModalShow(true)}}>Редактировать</Button>
                     <Button variant="danger" onClick={() => handleDEL(q.id)}>Удалить</Button>
                 </span>
             ))}
@@ -73,6 +81,7 @@ function Quotes() {
                 show={modalShow}
                 onHide={() => setModalShow(false)}
                 change={handlePut}
+                changeid={global.idd}
             />
             <ModalA
                 show={modalShowA}
