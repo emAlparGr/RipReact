@@ -32,12 +32,37 @@
     align-items: center;
 }
 
+.chat-container {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 50%;
+    align-items: center;
+}
+
+.chat-messages-container {
+    width: 100%;
+    height: 100%;
+}
+
+.chat-controls {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.chat-input {
+    min-width: 50%;
+}
+
 .head {
     position: absolute;
     right: 18%;
     top: 50%;
     color: white;
-    -webkit-text-stroke: 1px palevioletred ;
+    -webkit-text-stroke: 1px palevioletred;
 }
 
 .quot {

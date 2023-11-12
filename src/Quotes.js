@@ -1,7 +1,8 @@
-import { Button } from 'react-bootstrap';
 import React from 'react';
-import MyVerticallyCenteredModal from './MyVerticallyCenteredModal'; // Замените 'ModalComponents' на путь к вашим модальным окнам
+import { Button } from 'react-bootstrap';
+import MyVerticallyCenteredModal from './MyVerticallyCenteredModal'; 
 import ModalA from './ModalA';
+import { Link } from 'react-router-dom';
 
 function Quotes() {
 
@@ -69,7 +70,10 @@ function Quotes() {
 
     return (
         <div className='left-container'>
-            <div className="ad"> <Button variant="outline-primary" onClick={() => setModalShowA(true)}>Добавить</Button></div>
+            <div className="ad"> <Button variant="outline-primary" onClick={() => setModalShowA(true)}>Добавить</Button>
+                <Link to="/chat" className="btn btn-outline-primary">Чат</Link>
+            </div>
+            
             {ListQ.map((q) => (
                 <span className="quot" key={q.id}>
                     <li>{q.author}</li>
