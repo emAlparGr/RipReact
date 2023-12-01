@@ -72,6 +72,7 @@ function Quotes() {
         <div className='left-container'>
             <div className="ad"> <Button variant="outline-primary" onClick={() => setModalShowA(true)}>Добавить</Button>
                 <Link to="/chat" className="btn btn-outline-primary">Чат</Link>
+                <Link to="/login" className="btn btn-outline-primary">Вход</Link>
             </div>
             
             {ListQ.map((q) => (
