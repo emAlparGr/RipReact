@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import MyVerticallyCenteredModal from './MyVerticallyCenteredModal'; 
+import MyVerticallyCenteredModal from './MyVerticallyCenteredModal';
 import ModalA from './ModalA';
-import { Link } from 'react-router-dom';
+import { CurrentUser, Token } from './UserConnector'
 
 function Quotes() {
 
@@ -11,10 +11,11 @@ function Quotes() {
     const [ListQ, setListQ] = React.useState([]);
 
     React.useEffect(() => {
-        fetch("http://localhost:8000/api/quotes/qget")
-            .then(respone => { return respone.json() })
-            .then(responeData => { setListQ(responeData.quotes) })
-
+        fetch("http://localhost:8000/api/quotes/qget", {
+            method: 'get',
+        })
+            .then(response => { return response.json() })
+            .then(responseData => { setListQ(responseData.quotes) })
     }, [])
 
     const handleSave = Quote => {
@@ -22,12 +23,15 @@ function Quotes() {
         fd.append('author', Quote);
         fetch("http://localhost:8000/api/quotes/qpost", {
             method: "POST",
+            headers: {
+                'LAB-TOKEN': Token
+            },
             body: fd,
         })
-            .then(respone => { return respone.json() })
-            .then(responeData => {
+            .then(response => { return response.json() })
+            .then(responseData => {
                 let arr = Array.from(ListQ);
-                arr.push(responeData.author);
+                arr.push(responseData.author);
                 setListQ(arr);
                 setModalShowA(false);
             })
@@ -37,13 +41,16 @@ function Quotes() {
         fetch("http://localhost:8000/api/quotes/qput/" + changeid, {
             method: "PUT",
             body: JSON.stringify({ author: Quote }),
+            headers: {
+                'LAB-TOKEN': Token
+            }
         })
-            .then(respone => { return respone.json() })
-            .then(responeData => {
+            .then(response => { return response.json() })
+            .then(responseData => {
                 let arr = Array.from(ListQ);
                 let deleteId = arr.findIndex(item => item.id === changeid)
                 arr.splice(deleteId, 1);
-                arr.push(responeData.author);
+                arr.push(responseData.author);
                 setListQ(arr);
                 setModalShow(false);
             })
@@ -52,9 +59,12 @@ function Quotes() {
     const handleDEL = Quote => {
         fetch("http://localhost:8000/api/quotes/" + Quote, {
             method: "DELETE",
+            headers: {
+                'LAB-TOKEN': Token
+            }
         })
-            .then(respone => { return respone.json() })
-            .then(responeData => {
+            .then(response => { return response.json() })
+            .then(responseData => {
                 let arr = Array.from(ListQ);
                 let deleteId = arr.findIndex(item => item.id === Quote)
                 arr.splice(deleteId, 1);
@@ -70,18 +80,25 @@ function Quotes() {
 
     return (
         <div className='left-container'>
-            <div className="ad"> <Button variant="outline-primary" onClick={() => setModalShowA(true)}>Добавить</Button>
-                <Link to="/chat" className="btn btn-outline-primary">Чат</Link>
-                <Link to="/login" className="btn btn-outline-primary">Вход</Link>
+            <h2 className='centered'>Цитаты</h2>
+
+            <div className='container__quotes'>
+                {ListQ.map((q) => (
+                    <div className="container__quotes__one" key={q.id}>
+                        <span className="quot">
+                            <li>{q.author}</li>
+                            {CurrentUser && <div className='quot__buttons'>
+                                <Button variant="outline-secondary" onClick={() => { changeid(q.id); setModalShow(true) }}>Редактировать</Button>
+                                <Button variant="danger" onClick={() => handleDEL(q.id)}>Удалить</Button>
+                            </div>}
+                        </span>
+                        <hr />
+                    </div>
+                ))}
             </div>
-            
-            {ListQ.map((q) => (
-                <span className="quot" key={q.id}>
-                    <li>{q.author}</li>
-                    <Button variant="outline-secondary" onClick={() => { changeid(q.id); setModalShow(true)}}>Редактировать</Button>
-                    <Button variant="danger" onClick={() => handleDEL(q.id)}>Удалить</Button>
-                </span>
-            ))}
+            {CurrentUser && <div className="ad">
+                <Button variant="outline-primary" onClick={() => setModalShowA(true)}>Добавить</Button>
+            </div>}
             <MyVerticallyCenteredModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}

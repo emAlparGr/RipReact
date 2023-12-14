@@ -53,8 +53,6 @@ function Chat() {
                     onChange={(e) => setInputMessage(e.target.value)}
                 />
                 <Button variant="outline-warning" onClick={sendMessage} >Отправить</Button>
-                <Link to="/quotes" className="btn btn-outline-primary">Вернуться к цитатам</Link>
-                <Link to="/login" className="btn btn-outline-primary">Вход</Link>
             </div>
         </div>
     );

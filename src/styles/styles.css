@@ -1,3 +1,12 @@
+.nav-bar {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+}
+
 .buttons {
     display: flex;
     flex-direction: row;
@@ -24,10 +33,31 @@
 
 .left-container {
     position: fixed;
-    top: 50%;
     display: flex;
     flex-direction: column;
-    height: 70%;
+    height: -webkit-fill-available;
+    width: 50%;
+    align-items: center;
+}
+
+.container__quotes {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.container__quotes__one {
+    width: inherit;
+}
+
+.left-container__auth {
+    display: flex;
+    position: fixed;
+    flex-direction: column;
     width: 50%;
     align-items: center;
 }
@@ -37,7 +67,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100%;
+    height: -webkit-fill-available;
     width: 50%;
     align-items: center;
 }
@@ -54,7 +84,7 @@
 }
 
 .chat-input {
-    min-width: 50%;
+    width: -webkit-fill-available;
 }
 
 .head {
@@ -70,11 +100,17 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    column-gap: 10px;
+    margin-left: 10px;
+    justify-content: space-between;
 }
 
 .ad {
-    top: 0;
-    position: fixed;
-    left: 0;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.quot__buttons {
+    display: flex;
+    column-gap: 10px;
 }
