@@ -46,8 +46,9 @@
     flex-direction: column;
     align-items: center;
     height: 100%;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: center;
+    overflow-y: scroll;
 }
 
 .container__quotes__one {
