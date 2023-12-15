@@ -47,7 +47,7 @@
     align-items: center;
     height: 100%;
     flex-wrap: nowrap;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .container__quotes__one {
