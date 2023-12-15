@@ -108,7 +108,7 @@ function Quotes() {
             <ModalA
                 show={modalShowA}
                 onHide={() => setModalShowA(false)}
-                Save={handleSave}
+                save={handleSave}
             />
         </div>
     )

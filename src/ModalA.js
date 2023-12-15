@@ -23,7 +23,7 @@ export default function ModalA(props) {
             </Modal.Body>
             <Modal.Footer>
                 <Button variant='success' onClick={() => {
-                    props.Save(ChangeQ);
+                    props.save(ChangeQ);
                 }}>Сохранить</Button>
             </Modal.Footer>
         </Modal>
